@@ -1,5 +1,7 @@
 /* 
  * PrimeTime Watchface v1.0
+ * 
+ * main.c
  *
  * Copyright (c) 2014 Brain Dance Designs LLC
  * 
@@ -161,16 +163,6 @@ void window_load (Window *window)
   //Load font
   ResHandle font_handle = resource_get_handle(RESOURCE_ID_FONT_PRIMER_PRINT_BOLD_12);
   
-  //Load bitmap into GBitmap structure
-  //The ID you chose when uploading is prefixed with 'RESOURCE_ID_'
-  //watchface_bitmap = gbitmap_create_with_resource(RESOURCE_ID_IMAGE_WATCHFACE_BLACK);
- 
-  //Create BitmapLayer to show GBitmap and add to Window
-  //watchface_layer = bitmap_layer_create(GRect(0, 0, 144, 168));
-  //watchface_layer = bitmap_layer_create(bounds);
-  //bitmap_layer_set_bitmap(watchface_layer, watchface_bitmap);
-  //layer_add_child(window_layer, bitmap_layer_get_layer(watchface_layer));
-  
   text_layer = text_layer_create(bounds);
   text_layer_set_background_color(text_layer, GColorClear);
   text_layer_set_text_color(text_layer, GColorWhite);
@@ -192,12 +184,6 @@ void window_load (Window *window)
   text_layer_set_font(day_label, fonts_load_custom_font(font_handle));
 
   layer_add_child(date_layer, text_layer_get_layer(day_label));
-
-  // init battery indicator
-  
-  
-  // init bluetooth indicator
-  
   
   // init month
   month_label = text_layer_create(GRect(50, 96, 27, 20));
