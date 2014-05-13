@@ -19,7 +19,9 @@ Font - Primer Print Bold - Typodermic Fonts - www.dafont.com/primer-print.font
 Code snippets adapted from the following:
 
 Pebble SDK Examples - simple-analog
+
 Pebble SDK 2.0 Tutorials - Chris Lewis
+
 Morpheuz Sleep Monitor - James Fowler
 
 
