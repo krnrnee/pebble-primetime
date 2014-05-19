@@ -9,7 +9,7 @@ Features
 - Analog & digital time (honors 12/24 setting)
 - Day & Date
 - Bluetooth and battery indicators
-- Choice of light or dark screen
+- Now with Choice of light or dark screen
 - Vibration on Disconnect from Bluetooth
 - Configurable settings
 
@@ -27,7 +27,7 @@ Version 1.0
 - Initial release
 
 Version 1.2
-- Now with choice of light or dark screen
+- Added choice of light or dark screen
 - Added vibration on disconnection from Bluetooth
 - Added settings and settings configuration page (via phone only)
   - Show/Hide Battery Indicator
