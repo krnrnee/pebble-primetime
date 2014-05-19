@@ -24,4 +24,7 @@ Pebble SDK 2.0 Tutorials - Chris Lewis
 
 Morpheuz Sleep Monitor - James Fowler
 
+Version 1.0
+Initial release
+
 
