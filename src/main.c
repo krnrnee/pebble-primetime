@@ -45,6 +45,7 @@ static GBitmap *icon_battery;
 static GBitmap *icon_battery_charge;
 static uint8_t battery_level;
 static bool battery_plugged;
+static bool mAppStarted;
 
 static GBitmap *bluetooth_bitmap;
 
@@ -88,6 +89,10 @@ static void battery_state_handler(BatteryChargeState charge) {
 
 //Bluetooth connection status
 static void bluetooth_state_handler(bool connected) {
+    if (mAppStarted && !connected && vibrate==vibOnDisconnectYes && !battery_plugged) {
+		// vibe!
+		vibes_long_pulse();
+    }
 	layer_set_hidden(bitmap_layer_get_layer(bluetooth_layer), !connected);
 }
 
@@ -396,6 +401,8 @@ void init ()
   const GPoint center = tempcenter;
   gpath_move_to(minute_arrow, center);
   gpath_move_to(hour_arrow, center);
+  
+  mAppStarted = true;
   
   //push the window onto the stack
   window_stack_push(window, true);
