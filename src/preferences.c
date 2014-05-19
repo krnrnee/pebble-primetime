@@ -1,7 +1,7 @@
 /*
  * PrimeTime Watchface v1.02
  * 
- * main.h
+ * preferences.c
  *
  * Copyright (c) 2014 Brain Dance Designs LLC
  * 
@@ -25,21 +25,39 @@
  */
 
 #include <pebble.h>
-  
-static const GPathInfo MINUTE_HAND_POINTS =
-{
-  3,
-  (GPoint []) {
-    { -5, 15 },
-    { 5, 15 },
-    { 0, -70 }
-  }
-};
 
-static const GPathInfo HOUR_HAND_POINTS = {
-  3, (GPoint []){
-    {-5, 15},
-    {5, 15},
-    {0, -50}
-  }
-};
+#include "preferences.h"
+  
+const int persistPrefsKey = 1000;
+
+typedef struct __attribute__((__packed__)) {
+     uint8_t battIndOn;
+     uint8_t btIndOn;
+     uint8_t vibOnDisconnect;
+     uint8_t invScreen;
+ } persistPrefs;
+
+persistPrefs pprefs;
+    
+void init_preferences () {
+  //  retrieve settings
+  if (persist_exists(persistPrefsKey)) {
+    persist_read_data(persistPrefsKey, &pprefs, sizeof(persistPrefs));
+    battInd = pprefs.battIndOn;
+    btInd = pprefs.btIndOn;
+    vibrate = pprefs.vibOnDisconnect;
+    screen = pprefs.invScreen;
+  }  
+}
+
+void store_preferences () {
+  // store settings
+  pprefs.battIndOn = battInd;
+  pprefs.btIndOn = btInd;
+  pprefs.vibOnDisconnect = vibrate;
+  pprefs.invScreen = screen;
+  
+  persist_write_data(persistPrefsKey, &pprefs, sizeof(persistPrefs));
+}
+
+
