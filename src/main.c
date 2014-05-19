@@ -339,19 +339,19 @@ void init ()
   app_sync_init(&app, buffer, sizeof(buffer), tuples, ARRAY_LENGTH(tuples),
                 tuple_changed_callback, app_error_callback, NULL);
   
-  const Tuple *temppref = app_sync_get(&app, battIndOn); 
-  if (temppref == NULL) {
-      //null do nothing
-    APP_LOG(APP_LOG_LEVEL_INFO, "battIndOn not found! battIndOn = %d",battIndOn);
-  }
-  else {
-    int value = temppref->value->uint8;
-    battInd = value;
-    APP_LOG(APP_LOG_LEVEL_INFO, "battIndOn found! battIndOn = %d",battIndOn);
-    static char buf[] = "123456";
-    snprintf(buf, sizeof(buf), "%d", value);
-    APP_LOG(APP_LOG_LEVEL_INFO, buf);    
-  }
+//  const Tuple *temppref = app_sync_get(&app, battIndOn); 
+//  if (temppref == NULL) {
+//      //null do nothing
+//    APP_LOG(APP_LOG_LEVEL_INFO, "battIndOn not found! battIndOn = %d",battIndOn);
+//  }
+//  else {
+//    int value = temppref->value->uint8;
+//    battInd = value;
+//    APP_LOG(APP_LOG_LEVEL_INFO, "battIndOn found! battIndOn = %d",battIndOn);
+//    static char buf[] = "123456";
+//    snprintf(buf, sizeof(buf), "%d", value);
+//    APP_LOG(APP_LOG_LEVEL_INFO, buf);    
+//  }
   
   //init battery indicator
 	icon_battery = gbitmap_create_with_resource(RESOURCE_ID_BATTERY_ICON);
@@ -397,10 +397,6 @@ void init ()
   gpath_move_to(minute_arrow, center);
   gpath_move_to(hour_arrow, center);
   
-  //  inverter
-  //inverter_layer = inverter_layer_create(GRect((screen == screen_black) ? 144 : 0, 0, 144, 168));
-  //layer_add_child(window_get_root_layer(window), inverter_layer_get_layer(inverter_layer));
-
   //push the window onto the stack
   window_stack_push(window, true);
 }

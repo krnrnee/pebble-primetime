@@ -47,16 +47,6 @@
             },
             {
                 "type": "png",
-                "name": "MENU_ICON_SM",
-                "file": "images/PrimeTime icon sm.png"
-            },
-            {
-                "type": "png",
-                "name": "MENU_ICON_LG",
-                "file": "images/PrimeTime icon lg.png"
-            },
-            {
-                "type": "png",
                 "menuIcon": true,
                 "name": "MENU_ICON_TINY",
                 "file": "images/PrimeTime icon tiny.png"

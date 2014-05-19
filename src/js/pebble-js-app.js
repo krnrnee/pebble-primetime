@@ -1,9 +1,9 @@
-var initialized = false;
+//var initialized = false;
 
-Pebble.addEventListener("ready", function() {
-  console.log("ready called!");
-  initialized = true;
-});
+//Pebble.addEventListener("ready", function() {
+//  console.log("ready called!");
+//  initialized = true;
+//});
 
 
 // app message sent successfully
@@ -25,28 +25,30 @@ function appMessageNack(e) {
 Pebble.addEventListener("ready",
 	function(e) {
 		console.log("connect! [" + e.ready + "] (" + e.type + ")");
-	}
-);
+//	}
+//);
 
-// display configuration screen
 //
-Pebble.addEventListener("ready",
-  function(e) {
+//Pebble.addEventListener("ready",
+//  function(e) {
     console.log("JavaScript app ready and running!");
 		var settings = localStorage.getItem("settings");
     if (!settings) {
-      //do nothing
+      //initialize settings to all zeros
+      settings = {"battIndOn":"0","btIndOn":"0","vibOnDisconnect":"0","invScreen":"0"};
+      //settings = JSON.parse({"battIndOn":"0","btIndOn":"0","vibOnDisconnect":"0","invScreen":"0"});
     }
     else {
-      //send initial settings to the phone
-      console.log("settings found, sending to phone");
+      //send stored settings to watch
+      console.log("settings found");
 			console.log("Settings: " + settings);
       settings = JSON.parse(settings);
-      Pebble.sendAppMessage(settings, appMessageAck, appMessageNack);
     }
+    Pebble.sendAppMessage(settings, appMessageAck, appMessageNack);
   }
 );
 
+// display configuration screen
 Pebble.addEventListener("showConfiguration",
 	function() {
 		var settings = localStorage.getItem("settings");
@@ -54,19 +56,32 @@ Pebble.addEventListener("showConfiguration",
     var url = config + "?settings=" + encodeURIComponent(JSON.stringify(settings));
 		console.log("Opening Config: " + url);
     console.log("Settings: " + localStorage.getItem("settings"));
-    Pebble.openURL('http://braindancedesigns.com/pebble/primetime-config2.html?settings=' + encodeURIComponent(JSON.stringify(settings)));
-	}
+    if (!settings) {
+      Pebble.openURL('http://braindancedesigns.com/pebble/primetime-config2.html');      
+    }
+    else {
+      Pebble.openURL('http://braindancedesigns.com/pebble/primetime-config2.html?settings=' + encodeURIComponent(JSON.stringify(settings)));
+    }
+  }
 );
 
 // close configuration screen
-//
 Pebble.addEventListener("webviewclosed",
 	function(e) {
 		var settings;
 		try {
 			settings = JSON.parse(decodeURIComponent(e.response));
 			localStorage.clear();
-			localStorage.setItem("settings", JSON.stringify(settings));
+      if (!settings) {
+        console.log("settings reset");
+      //initialize settings to all zeros
+      settings = {"battIndOn":"0","btIndOn":"0","vibOnDisconnect":"0","invScreen":"0"};
+      //settings = JSON.parse({"battIndOn":"0","btIndOn":"0","vibOnDisconnect":"0","invScreen":"0"});
+      console.log("Settings: " + settings);
+      }
+      else {
+        localStorage.setItem("settings", JSON.stringify(settings));
+      }
 			console.log("Settings: " + localStorage.getItem("settings"));
 			Pebble.sendAppMessage(settings, appMessageAck, appMessageNack);
 		} catch(err) {
