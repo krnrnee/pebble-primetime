@@ -28,30 +28,63 @@
 
 #include "preferences.h"
   
-const int persistPrefsKey = 1000;
+const int persistPrefsKey = 1012; //version 1.2
+const int persistPrefsKeyOld = 1000; //version 1.0
+
 
 typedef struct __attribute__((__packed__)) {
+     char *appversion;
      uint8_t battIndOn;
      uint8_t btIndOn;
      uint8_t vibOnDisconnect;
      uint8_t invScreen;
  } persistPrefs;
 
+typedef struct __attribute__((__packed__)) {
+     uint8_t battIndOn;
+     uint8_t btIndOn;
+     uint8_t vibOnDisconnect;
+     uint8_t invScreen;
+ } persistPrefsOld;
+
 persistPrefs pprefs;
     
 void init_preferences () {
   //  retrieve settings
   if (persist_exists(persistPrefsKey)) {
+    APP_LOG(APP_LOG_LEVEL_INFO, "found new version! Version key = %d",persistPrefsKey);
     persist_read_data(persistPrefsKey, &pprefs, sizeof(persistPrefs));
     battInd = pprefs.battIndOn;
     btInd = pprefs.btIndOn;
     vibrate = pprefs.vibOnDisconnect;
     screen = pprefs.invScreen;
-  }  
+  }
+  else {
+    if (persist_exists(persistPrefsKeyOld)) {
+      //prior version - need to upgrade settings
+      APP_LOG(APP_LOG_LEVEL_INFO, "found old version! Version key = %d",persistPrefsKeyOld);
+      persistPrefsOld pprefsold;
+      persist_read_data(persistPrefsKeyOld, &pprefsold, sizeof(persistPrefsOld));
+      
+      //read settings
+      battInd = pprefsold.battIndOn;
+      btInd = pprefsold.btIndOn;
+      vibrate = pprefsold.vibOnDisconnect;
+      screen = pprefsold.invScreen;  
+      
+      //delete old version
+      persist_delete(persistPrefsKeyOld);
+      
+      //store new version
+      store_preferences();
+      
+    }
+  }
 }
 
 void store_preferences () {
   // store settings
+  pprefs.appversion = "1.2";
   pprefs.battIndOn = battInd;
   pprefs.btIndOn = btInd;
   pprefs.vibOnDisconnect = vibrate;
