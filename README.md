@@ -1,4 +1,4 @@
-pebble-primetime-1.2
+pebble-primetime
 ====================
 
 PrimeTime - Pebble Standalone Watchface - Version 1.2
