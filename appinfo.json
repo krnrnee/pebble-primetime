@@ -1,44 +1,34 @@
 {
-    "versionLabel": "1.0",
     "uuid": "2ec7cbed-bda2-439d-b856-9cbebfd185cf",
-    "appKeys": {},
-    "longName": "PrimeTime Watch",
-    "versionCode": 1,
+    "versionLabel": "1.2",
+    "companyName": "Brain Dance Designs LLC",
     "capabilities": [
-        ""
+        "configurable"
     ],
     "shortName": "PrimeTime",
-    "companyName": "Brain Dance Designs LLC",
+    "longName": "PrimeTime Watch",
+    "versionCode": 1,
     "watchapp": {
         "watchface": true
+    },
+    "appKeys": {
+        "settings": 4,
+        "battIndOn": 0,
+        "vibOnDisconnect": 2,
+        "btIndOn": 1,
+        "invScreen": 3
     },
     "resources": {
         "media": [
             {
-                "menuIcon": true,
-                "type": "png",
-                "name": "MENU_ICON_TINY",
-                "file": "images/PrimeTime icon tiny.png"
+                "type": "font",
+                "name": "FONT_PRIMER_PRINT_BOLD_12",
+                "file": "fonts/primer print bold.ttf"
             },
             {
                 "type": "png",
-                "name": "MENU_ICON_LG",
-                "file": "images/PrimeTime icon lg.png"
-            },
-            {
-                "type": "png",
-                "name": "MENU_ICON_SM",
-                "file": "images/PrimeTime icon sm.png"
-            },
-            {
-                "type": "png",
-                "name": "BLUETOOTH_ICON",
-                "file": "images/bluetooth.png"
-            },
-            {
-                "type": "png",
-                "name": "BATTERY_ICON",
-                "file": "images/battery_icon.png"
+                "name": "IMAGE_WATCHFACE_BLACK",
+                "file": "images/watchfaceblack.png"
             },
             {
                 "type": "png",
@@ -47,13 +37,19 @@
             },
             {
                 "type": "png",
-                "name": "IMAGE_WATCHFACE_BLACK",
-                "file": "images/watchfaceblack.png"
+                "name": "BATTERY_ICON",
+                "file": "images/battery_icon.png"
             },
             {
-                "type": "font",
-                "name": "FONT_PRIMER_PRINT_BOLD_12",
-                "file": "fonts/primer print bold.ttf"
+                "type": "png",
+                "name": "BLUETOOTH_ICON",
+                "file": "images/bluetooth.png"
+            },
+            {
+                "type": "png",
+                "menuIcon": true,
+                "name": "MENU_ICON_TINY",
+                "file": "images/PrimeTime icon tiny.png"
             }
         ]
     }
