@@ -1,56 +1,60 @@
 {
-    "uuid": "2ec7cbed-bda2-439d-b856-9cbebfd185cf",
-    "versionLabel": "1.2",
-    "companyName": "Brain Dance Designs LLC",
-    "capabilities": [
-        "configurable"
-    ],
-    "shortName": "PrimeTime",
-    "longName": "PrimeTime Watch",
-    "versionCode": 1,
-    "watchapp": {
-        "watchface": true
-    },
-    "appKeys": {
-        "settings": 4,
-        "battIndOn": 0,
-        "vibOnDisconnect": 2,
-        "btIndOn": 1,
-        "invScreen": 3
-    },
     "resources": {
         "media": [
             {
-                "type": "font",
                 "name": "FONT_PRIMER_PRINT_BOLD_12",
+                "type": "font",
                 "file": "fonts/primer print bold.ttf"
             },
             {
-                "type": "png",
                 "name": "IMAGE_WATCHFACE_BLACK",
+                "type": "png",
                 "file": "images/watchfaceblack.png"
             },
             {
-                "type": "png",
                 "name": "BATTERY_CHARGE",
+                "type": "png",
                 "file": "images/battery_charge.png"
             },
             {
-                "type": "png",
                 "name": "BATTERY_ICON",
+                "type": "png",
                 "file": "images/battery_icon.png"
             },
             {
-                "type": "png",
                 "name": "BLUETOOTH_ICON",
+                "type": "png",
                 "file": "images/bluetooth.png"
             },
             {
+                "name": "MENU_ICON_SM",
                 "type": "png",
-                "menuIcon": true,
+                "file": "images/PrimeTime icon sm.png"
+            },
+            {
+                "name": "MENU_ICON_LG",
+                "type": "png",
+                "file": "images/PrimeTime icon lg.png"
+            },
+            {
                 "name": "MENU_ICON_TINY",
+                "menuIcon": true,
+                "type": "png",
                 "file": "images/PrimeTime icon tiny.png"
             }
         ]
-    }
+    },
+    "companyName": "Brain Dance Designs LLC",
+    "shortName": "PrimeTime",
+    "uuid": "2ec7cbed-bda2-439d-b856-9cbebfd185cf",
+    "versionCode": 1,
+    "capabilities": [
+        ""
+    ],
+    "longName": "PrimeTime Watch",
+    "watchapp": {
+        "watchface": true
+    },
+    "appKeys": {},
+    "versionLabel": "1.0"
 }
