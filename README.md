@@ -1,7 +1,7 @@
 pebble-primetime
 ====================
 
-PrimeTime - Pebble Standalone Watchface - Version 1.2
+PrimeTime - Pebble Standalone Watchface - Version 1.3
 
 Analog watch face using only prime numbers on the dial.  If you look closely you will see that the numbers form an interesting pattern on the dial.  Any super science brains want to explain that? :)
 
@@ -23,8 +23,9 @@ Thanks go out to the folks below for generously contributing their work!
 - Pebble SDK 2.0 Tutorials - Chris Lewis
 - Morpheuz Sleep Monitor - James Fowler
 
-Version 1.0
-- Initial release
+Version 1.3
+- Updated watchface to make more readable
+- Minor code cleanup
 
 Version 1.2
 - Added choice of light or dark screen
@@ -35,4 +36,6 @@ Version 1.2
   - Vibrate on Disconnect
   - Screen color preference (light or dark)
 
+Version 1.0
+- Initial release
 
