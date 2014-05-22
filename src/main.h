@@ -1,5 +1,5 @@
 /*
- * PrimeTime Watchface v1.02
+ * PrimeTime Watchface v1.3
  * 
  * main.h
  *
