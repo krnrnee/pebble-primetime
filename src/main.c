@@ -237,7 +237,7 @@ void window_load (Window *window)
   GRect bounds = layer_get_bounds(window_layer);
   
   //Load font
-  ResHandle font_handle = resource_get_handle(RESOURCE_ID_FONT_PRIMER_PRINT_BOLD_12);
+  ResHandle font_handle = resource_get_handle(RESOURCE_ID_FONT_PRIMER_PRINT_BOLD_14);
   
   text_layer = text_layer_create(bounds);
   text_layer_set_background_color(text_layer, GColorClear);
@@ -253,7 +253,7 @@ void window_load (Window *window)
   layer_add_child(window_layer, date_layer);
 
   // init day
-  day_label = text_layer_create(GRect(4, 0, 27, 20));
+  day_label = text_layer_create(GRect(2, 0, 27, 20));
   text_layer_set_text(day_label, day_buffer);
   text_layer_set_background_color(day_label, GColorBlack);
   text_layer_set_text_color(day_label, GColorWhite);
@@ -262,7 +262,7 @@ void window_load (Window *window)
   layer_add_child(date_layer, text_layer_get_layer(day_label));
   
   // init month
-  month_label = text_layer_create(GRect(50, 96, 27, 20));
+  month_label = text_layer_create(GRect(46, 96, 30, 20));
   text_layer_set_text(month_label, day_buffer);
   text_layer_set_background_color(month_label, GColorBlack);
   text_layer_set_text_color(month_label, GColorWhite);
