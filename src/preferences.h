@@ -1,7 +1,7 @@
 /*
  * PrimeTime Watchface v1.02
  * 
- * main.h
+ * preferences.h
  *
  * Copyright (c) 2014 Brain Dance Designs LLC
  * 
@@ -26,20 +26,13 @@
 
 #include <pebble.h>
   
-static const GPathInfo MINUTE_HAND_POINTS =
-{
-  3,
-  (GPoint []) {
-    { -5, 15 },
-    { 5, 15 },
-    { 0, -70 }
-  }
-};
+enum Settings { battIndOn = 0, btIndOn = 1, vibOnDisconnect = 2, invScreen = 3 };
 
-static const GPathInfo HOUR_HAND_POINTS = {
-  3, (GPoint []){
-    {-5, 15},
-    {5, 15},
-    {0, -50}
-  }
-};
+enum battIndOn { battIndOnNo = 0, battIndOnYes = 1, battIndCount } battInd;
+enum btIndOn { btIndOnNo = 0, btIndOnYes = 1, btIndCount } btInd;
+enum vibOnDisconnect { vibOnDisconnectNo = 0, vibOnDisconnectYes = 1, vibCount } vibrate;
+enum invScreen { screen_black = 0, screen_white = 1, screen_count } screen;
+
+void init_preferences();
+void store_preferences();
+

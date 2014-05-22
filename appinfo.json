@@ -2,24 +2,10 @@
     "resources": {
         "media": [
             {
-                "name": "FONT_PRIMER_PRINT_BOLD_12",
-                "type": "font",
-                "file": "fonts/primer print bold.ttf"
-            },
-            {
-                "name": "IMAGE_WATCHFACE_BLACK",
+                "name": "MENU_ICON_TINY",
+                "menuIcon": true,
                 "type": "png",
-                "file": "images/watchfaceblack.png"
-            },
-            {
-                "name": "BATTERY_CHARGE",
-                "type": "png",
-                "file": "images/battery_charge.png"
-            },
-            {
-                "name": "BATTERY_ICON",
-                "type": "png",
-                "file": "images/battery_icon.png"
+                "file": "images/PrimeTime icon tiny.png"
             },
             {
                 "name": "BLUETOOTH_ICON",
@@ -27,20 +13,24 @@
                 "file": "images/bluetooth.png"
             },
             {
-                "name": "MENU_ICON_SM",
+                "name": "BATTERY_ICON",
                 "type": "png",
-                "file": "images/PrimeTime icon sm.png"
+                "file": "images/battery_icon.png"
             },
             {
-                "name": "MENU_ICON_LG",
+                "name": "BATTERY_CHARGE",
                 "type": "png",
-                "file": "images/PrimeTime icon lg.png"
+                "file": "images/battery_charge.png"
             },
             {
-                "name": "MENU_ICON_TINY",
-                "menuIcon": true,
+                "name": "IMAGE_WATCHFACE_BLACK",
                 "type": "png",
-                "file": "images/PrimeTime icon tiny.png"
+                "file": "images/watchfaceblack.png"
+            },
+            {
+                "name": "FONT_PRIMER_PRINT_BOLD_12",
+                "type": "font",
+                "file": "fonts/primer print bold.ttf"
             }
         ]
     },
@@ -49,12 +39,18 @@
     "uuid": "2ec7cbed-bda2-439d-b856-9cbebfd185cf",
     "versionCode": 1,
     "capabilities": [
-        ""
+        "configurable"
     ],
     "longName": "PrimeTime Watch",
     "watchapp": {
         "watchface": true
     },
-    "appKeys": {},
-    "versionLabel": "1.0"
+    "appKeys": {
+        "btIndOn": 1,
+        "battIndOn": 0,
+        "settings": 4,
+        "vibOnDisconnect": 2,
+        "invScreen": 3
+    },
+    "versionLabel": "1.2"
 }
