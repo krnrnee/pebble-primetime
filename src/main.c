@@ -1,5 +1,5 @@
 /* 
- * PrimeTime Watchface v1.02
+ * PrimeTime Watchface v1.3
  * 
  * main.c
  *
@@ -63,6 +63,13 @@ TextLayer *num_label;
 char num_buffer[4];
 
 char time_buffer[] = "00:00";
+
+enum Settings { battIndOn = 0, btIndOn = 1, vibOnDisconnect = 2, invScreen = 3 };
+
+enum battIndOn { battIndOnNo = 0, battIndOnYes = 1, battIndCount };
+enum btIndOn { btIndOnNo = 0, btIndOnYes = 1, btIndCount };
+enum vibOnDisconnect { vibOnDisconnectNo = 0, vibOnDisconnectYes = 1, vibCount };
+enum invScreen { screen_black = 0, screen_white = 1, screen_count };
   
 //Battery icon callback handler
 static void battery_layer_update_callback(Layer *layer, GContext *ctx) {
@@ -89,7 +96,7 @@ static void battery_state_handler(BatteryChargeState charge) {
 
 //Bluetooth connection status
 static void bluetooth_state_handler(bool connected) {
-    if (mAppStarted && !connected && vibrate==vibOnDisconnectYes && !battery_plugged) {
+    if (mAppStarted && !connected && getVibrate() == vibOnDisconnectYes && !battery_plugged) {
 		// vibe!
 		vibes_long_pulse();
     }
@@ -105,16 +112,16 @@ static void tuple_changed_callback(const uint32_t key, const Tuple* tuple_new, c
   if (value > 1) {
     value = value - 48;
   }
-      static char buf[] = "123456";
-    snprintf(buf, sizeof(buf), "%d", value);
-    APP_LOG(APP_LOG_LEVEL_INFO, buf);    
+  //static char buf[] = "123456";
+  //snprintf(buf, sizeof(buf), "%d", value);
+  //APP_LOG(APP_LOG_LEVEL_INFO, buf);    
   
   switch (key) {
     case battIndOn:
-      if ((value >= 0) && (value < battIndCount) && (battInd != value)) {
+      if ((value >= 0) && (value < battIndCount) && (getBattInd() != value)) {
         //  update value
-        battInd = value;
-        if (battInd == battIndOnNo) {          
+        setBattInd(value);
+        if (getBattInd() == battIndOnNo) {          
             battery_state_service_unsubscribe();
             layer_set_hidden(bitmap_layer_get_layer(battery_layer), true);
         }
@@ -125,10 +132,10 @@ static void tuple_changed_callback(const uint32_t key, const Tuple* tuple_new, c
       }
     break;
     case btIndOn:
-      if ((value >= 0) && (value < btIndCount) && (btInd != value)) {
+      if ((value >= 0) && (value < btIndCount) && (getBtInd() != value)) {
         //  update value
-        btInd = value;
-        if (btInd == btIndOnNo) {          
+        setBtInd(value);
+        if (getBtInd() == btIndOnNo) {          
             bluetooth_connection_service_unsubscribe();
             layer_set_hidden(bitmap_layer_get_layer(bluetooth_layer), true);
         }
@@ -139,17 +146,17 @@ static void tuple_changed_callback(const uint32_t key, const Tuple* tuple_new, c
       }
       break;
     case vibOnDisconnect:
-      if ((value >= 0) && (value < vibCount) && (vibrate != value))
+      if ((value >= 0) && (value < vibCount) && (getVibrate() != value))
         //  update value
-        vibrate = value;
+        setVibrate(value);
       break;
     case invScreen:
-      if ((value >= 0) && (value < screen_count) && (screen != value)) {
+      if ((value >= 0) && (value < screen_count) && (getScreen() != value)) {
         //  update value
-        screen = value;
+        setScreen(value);
         //  relocate inverter layer
         GRect rect = layer_get_frame(inverter_layer_get_layer(inverter_layer));
-        rect.origin.x = (screen == screen_black) ? 144 : 0;
+        rect.origin.x = (getScreen() == screen_black) ? 144 : 0;
         layer_set_frame(inverter_layer_get_layer(inverter_layer), rect);
       }
       break;
@@ -215,8 +222,8 @@ static void date_update_proc(Layer *layer, GContext *ctx) {
 
 void tick_handler(struct tm *tick_time, TimeUnits units_changed)
 {
-    //Here we will update the watchface display
-    //Format the buffer string using tick_time as the time source
+  //Here we will update the watchface display
+  //Format the buffer string using tick_time as the time source
   if (clock_is_24h_style())
     strftime(time_buffer, sizeof("00:00"), "%H:%M", tick_time);
   else
@@ -237,7 +244,7 @@ void window_load (Window *window)
   GRect bounds = layer_get_bounds(window_layer);
   
   //Load font
-  ResHandle font_handle = resource_get_handle(RESOURCE_ID_FONT_PRIMER_PRINT_BOLD_12);
+  ResHandle font_handle = resource_get_handle(RESOURCE_ID_FONT_PRIMER_PRINT_BOLD_14);
   
   text_layer = text_layer_create(bounds);
   text_layer_set_background_color(text_layer, GColorClear);
@@ -253,7 +260,7 @@ void window_load (Window *window)
   layer_add_child(window_layer, date_layer);
 
   // init day
-  day_label = text_layer_create(GRect(4, 0, 27, 20));
+  day_label = text_layer_create(GRect(2, 0, 27, 20));
   text_layer_set_text(day_label, day_buffer);
   text_layer_set_background_color(day_label, GColorBlack);
   text_layer_set_text_color(day_label, GColorWhite);
@@ -262,7 +269,7 @@ void window_load (Window *window)
   layer_add_child(date_layer, text_layer_get_layer(day_label));
   
   // init month
-  month_label = text_layer_create(GRect(50, 96, 27, 20));
+  month_label = text_layer_create(GRect(46, 96, 30, 20));
   text_layer_set_text(month_label, day_buffer);
   text_layer_set_background_color(month_label, GColorBlack);
   text_layer_set_text_color(month_label, GColorWhite);
@@ -292,7 +299,7 @@ void window_load (Window *window)
   t = localtime(&temp);
   
   //  inverter
-  inverter_layer = inverter_layer_create(GRect((screen == screen_black) ? 144 : 0, 0, 144, 168));
+  inverter_layer = inverter_layer_create(GRect((getScreen() == screen_black) ? 144 : 0, 0, 144, 168));
   layer_add_child(window_get_root_layer(window), inverter_layer_get_layer(inverter_layer));
  
   //Manually call the tick handler when the window is loading
@@ -334,29 +341,15 @@ void init ()
   
   //  app communication
   Tuplet tuples[] = {
-    TupletInteger(battIndOn, battInd),
-    TupletInteger(btIndOn, btInd),
-    TupletInteger(vibOnDisconnect, vibrate),
-    TupletInteger(invScreen, screen)
+    TupletInteger(battIndOn, getBattInd()),
+    TupletInteger(btIndOn, getBtInd()),
+    TupletInteger(vibOnDisconnect, getVibrate()),
+    TupletInteger(invScreen, getScreen())
   };
   app_message_open(160, 160);
   
   app_sync_init(&app, buffer, sizeof(buffer), tuples, ARRAY_LENGTH(tuples),
                 tuple_changed_callback, app_error_callback, NULL);
-  
-//  const Tuple *temppref = app_sync_get(&app, battIndOn); 
-//  if (temppref == NULL) {
-//      //null do nothing
-//    APP_LOG(APP_LOG_LEVEL_INFO, "battIndOn not found! battIndOn = %d",battIndOn);
-//  }
-//  else {
-//    int value = temppref->value->uint8;
-//    battInd = value;
-//    APP_LOG(APP_LOG_LEVEL_INFO, "battIndOn found! battIndOn = %d",battIndOn);
-//    static char buf[] = "123456";
-//    snprintf(buf, sizeof(buf), "%d", value);
-//    APP_LOG(APP_LOG_LEVEL_INFO, buf);    
-//  }
   
   //init battery indicator
 	icon_battery = gbitmap_create_with_resource(RESOURCE_ID_BATTERY_ICON);
@@ -370,7 +363,7 @@ void init ()
 	layer_add_child(window_layer, bitmap_layer_get_layer(battery_layer));
 	bitmap_layer_set_bitmap(battery_layer, icon_battery);
   
-  if (battInd == battIndOnYes) {
+  if (getBattInd() == battIndOnYes) {
     battery_state_service_subscribe(&battery_state_handler);
 	  layer_set_hidden(bitmap_layer_get_layer(battery_layer), false);
   }
@@ -384,7 +377,7 @@ void init ()
 	bluetooth_bitmap = gbitmap_create_with_resource(RESOURCE_ID_BLUETOOTH_ICON);
 	bitmap_layer_set_bitmap(bluetooth_layer, bluetooth_bitmap);
   
-  if (btInd == btIndOnYes) {
+  if (getBtInd() == btIndOnYes) {
 	  layer_set_hidden(bitmap_layer_get_layer(bluetooth_layer), !bluetooth_connection_service_peek());
     bluetooth_connection_service_subscribe(bluetooth_state_handler);
   }

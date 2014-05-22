@@ -1,5 +1,5 @@
 /*
- * PrimeTime Watchface v1.02
+ * PrimeTime Watchface v1.3
  * 
  * preferences.h
  *
@@ -23,16 +23,19 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+#pragma once
 
 #include <pebble.h>
   
-enum Settings { battIndOn = 0, btIndOn = 1, vibOnDisconnect = 2, invScreen = 3 };
-
-enum battIndOn { battIndOnNo = 0, battIndOnYes = 1, battIndCount } battInd;
-enum btIndOn { btIndOnNo = 0, btIndOnYes = 1, btIndCount } btInd;
-enum vibOnDisconnect { vibOnDisconnectNo = 0, vibOnDisconnectYes = 1, vibCount } vibrate;
-enum invScreen { screen_black = 0, screen_white = 1, screen_count } screen;
-
 void init_preferences();
 void store_preferences();
 
+int getBattInd();
+int getBtInd();
+int getVibrate();
+int getScreen();
+
+void setBattInd(int battInd);
+void setBtInd(int btInd);
+void setVibrate(int vibrate);
+void setScreen(int screen);

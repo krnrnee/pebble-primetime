@@ -1,5 +1,5 @@
 /*
- * PrimeTime Watchface v1.02
+ * PrimeTime Watchface v1.3
  * 
  * preferences.c
  *
@@ -31,7 +31,6 @@
 const int persistPrefsKey = 1012; //version 1.2
 const int persistPrefsKeyOld = 1000; //version 1.0
 
-
 typedef struct __attribute__((__packed__)) {
      char *appversion;
      uint8_t battIndOn;
@@ -48,9 +47,45 @@ typedef struct __attribute__((__packed__)) {
  } persistPrefsOld;
 
 persistPrefs pprefs;
-    
+
+int battInd = 0;
+int btInd = 0;
+int vibrate = 0;
+int screen = 0;
+
+int getBattInd(){
+  return battInd;
+}
+
+int getBtInd(){
+  return btInd;
+}
+
+int getVibrate(){
+  return vibrate;
+}
+
+int getScreen(){
+  return screen;
+}
+void setBattInd(int battIndIn){
+  battInd = battIndIn;
+}
+
+void setBtInd(int btIndIn){
+  btInd = btIndIn;
+}
+
+void setVibrate(int vibrateIn){
+  vibrate = vibrateIn;
+}
+
+void setScreen(int screenIn){
+  screen = screenIn;
+}
+
 void init_preferences () {
-  //  retrieve settings
+//  retrieve settings
   if (persist_exists(persistPrefsKey)) {
     APP_LOG(APP_LOG_LEVEL_INFO, "found new version! Version key = %d",persistPrefsKey);
     persist_read_data(persistPrefsKey, &pprefs, sizeof(persistPrefs));

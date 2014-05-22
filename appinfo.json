@@ -1,56 +1,56 @@
 {
-    "uuid": "2ec7cbed-bda2-439d-b856-9cbebfd185cf",
-    "versionLabel": "1.2",
+    "resources": {
+        "media": [
+            {
+                "name": "MENU_ICON_TINY",
+                "menuIcon": true,
+                "type": "png",
+                "file": "images/PrimeTime icon tiny.png"
+            },
+            {
+                "name": "BLUETOOTH_ICON",
+                "type": "png",
+                "file": "images/bluetooth.png"
+            },
+            {
+                "name": "BATTERY_ICON",
+                "type": "png",
+                "file": "images/battery_icon.png"
+            },
+            {
+                "name": "BATTERY_CHARGE",
+                "type": "png",
+                "file": "images/battery_charge.png"
+            },
+            {
+                "name": "IMAGE_WATCHFACE_BLACK",
+                "type": "png",
+                "file": "images/watchfaceblack.png"
+            },
+            {
+                "name": "FONT_PRIMER_PRINT_BOLD_14",
+                "type": "font",
+                "file": "fonts/primer print bold.ttf"
+            }
+        ]
+    },
     "companyName": "Brain Dance Designs LLC",
+    "shortName": "PrimeTime",
+    "uuid": "2ec7cbed-bda2-439d-b856-9cbebfd185cf",
+    "versionCode": 1,
     "capabilities": [
         "configurable"
     ],
-    "shortName": "PrimeTime",
     "longName": "PrimeTime Watch",
-    "versionCode": 1,
     "watchapp": {
         "watchface": true
     },
     "appKeys": {
-        "settings": 4,
-        "battIndOn": 0,
-        "vibOnDisconnect": 2,
         "btIndOn": 1,
+        "battIndOn": 0,
+        "settings": 4,
+        "vibOnDisconnect": 2,
         "invScreen": 3
     },
-    "resources": {
-        "media": [
-            {
-                "type": "font",
-                "name": "FONT_PRIMER_PRINT_BOLD_12",
-                "file": "fonts/primer print bold.ttf"
-            },
-            {
-                "type": "png",
-                "name": "IMAGE_WATCHFACE_BLACK",
-                "file": "images/watchfaceblack.png"
-            },
-            {
-                "type": "png",
-                "name": "BATTERY_CHARGE",
-                "file": "images/battery_charge.png"
-            },
-            {
-                "type": "png",
-                "name": "BATTERY_ICON",
-                "file": "images/battery_icon.png"
-            },
-            {
-                "type": "png",
-                "name": "BLUETOOTH_ICON",
-                "file": "images/bluetooth.png"
-            },
-            {
-                "type": "png",
-                "menuIcon": true,
-                "name": "MENU_ICON_TINY",
-                "file": "images/PrimeTime icon tiny.png"
-            }
-        ]
-    }
+    "versionLabel": "1.2"
 }
