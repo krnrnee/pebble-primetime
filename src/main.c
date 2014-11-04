@@ -260,7 +260,7 @@ void window_load (Window *window)
   layer_add_child(window_layer, date_layer);
 
   // init day
-  day_label = text_layer_create(GRect(2, 0, 27, 20));
+  day_label = text_layer_create(GRect(2, 0, 30, 20));
   text_layer_set_text(day_label, day_buffer);
   text_layer_set_background_color(day_label, GColorBlack);
   text_layer_set_text_color(day_label, GColorWhite);
