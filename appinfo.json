@@ -50,7 +50,7 @@
     "shortName": "PrimeTime",
     "uuid": "2ec7cbed-bda2-439d-b856-9cbebfd185cf",
     "versionCode": 1,
-    "versionLabel": "1.3",
+    "versionLabel": "1.4",
     "watchapp": {
         "watchface": true
     }

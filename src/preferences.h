@@ -1,5 +1,5 @@
 /*
- * PrimeTime Watchface v1.3
+ * PrimeTime Watchface v1.4
  * 
  * preferences.h
  *
